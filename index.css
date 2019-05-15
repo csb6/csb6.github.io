@@ -1,0 +1,25 @@
+body {
+    background-color: lightgrey;
+    font-family: Courier, sans-serif;
+    text-align: center;
+}
+
+h1 a {
+    color: black;
+    text-decoration: none;
+}
+
+#main-content {
+    text-align: left;
+    margin-left: 10%;
+    margin-right: 10%;
+    max-width: 80%;
+}
+
+#main-content p, #main-content ul {
+    margin-bottom: 2em;
+}
+
+#main-content > a {
+    margin-right: 1em;
+}
