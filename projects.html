@@ -17,34 +17,70 @@
     </div>
     <div id="main-content">
       <h2>Projects</h2>
-      <p>Here are my publicly released projects, in varying states of completion:</p>
-      <h3>March Madness Bracket Generator</h3>
+      <p>
+	Here are my publicly released projects, in varying states of
+	completion. Ordered roughly by date of creation:
+      </p>
+      <h3>Event Simulator (May 2019)</h3>
+      <a href="https://github.com/csb6/event-simulator">Repository</a>
+      <p>
+	A simulation module based on Markov chains. Custom simulations can be
+	created/run by specifying states/transitions in a JSON file and Python
+	code in a second file to be executed after each event. This was a quick
+	project, but a fascinating way to apply Markov chains to something
+	beyond making text. I also experimented with passing functions as
+	arguments and organizing the program in an object-oriented way.
+      </p>
+      <ul>
+	<li>Language/Technology: Python</li>
+	<li>Create an unlimited number of states/transitions</li>
+	<li>Assign probabilities that each transition occurs</li>
+	<li>Structured as a reusable Python module</li>
+      </ul>
+      <h3>March Madness Bracket Generator (April 2019)</h3>
       <a href="https://github.com/uacs337spring2019/final-project-march-madness">Repository</a>
       <a href="http://march-madness-app.herokuapp.com/main.html">Link to Web App</a>
       <p>
 	A web app that allows users to auto-generate an NCAA Tournament bracket
 	based on a selected team statistic, as well as search for information
-	about each team's roster.
+	about each team's roster. This was the final project for my Web Programming
+	course, and so made use of just about all of the material we covered,
+	including databases, client/server-side code, and page design. I also
+	learned how to deploy/update web applications onto a hosting service.
       </p>
       <ul>
+	<li>Language/Technology: JavaScript, HTML, CSS, Node.js, SQL, Heroku</li>
 	<li>See the accuracy of the generated bracket</li>
 	<li>Persistently save/load brackets to the server</li>
       </ul>
-      <h3>Tk-Code</h3>
+      <h3>Tk-Code (August-September 2018)</h3>
       <a href="https://github.com/csb6/tk-code">Repository</a>
-      <p>A basic text editor written in Ruby and the Tk GUI toolkit.</p>
+      <p>
+	A basic text editor. I spent a lot of time trying to cleanly organize
+	the app into classes (ex: a Document class for each open document, a
+	Menu class for managing the OS's menubar). While I did not implement a
+	fully featured IDE, the editor is still usable when working with
+	multiple documents and simple command-line tasks.
+      </p>
       <ul>
+	<li>Language/Technology: Ruby, Tk</li>
 	<li>Edit multiply files at once using a tabbed view</li>
 	<li>Collapsable tree view of the working directory</li>
 	<li>Simple integrated terminal emulator</li>
       </ul>
-      <h3>Squad Tactical Game</h3>
+      <h3>Squad Tactical Game (May-July 2018)</h3>
       <a href="https://github.com/csb6/squad-tactical-game">Repository</a>
       <p>
-	A 2D, top-down, turn-based tactical game based on the X-COM series.
-	Written in Ruby and the Tk GUI toolkit.
+	A 2D, top-down, turn-based tactical game based on the X-COM series. The
+	code is a bit messy because I experimented with inheritance and later
+	a component-based structure for the game's entity objects, but most
+	features are implemented. The most notable portion of the project
+	is my implementation of the A* pathfinding algorithm, which allows the
+	soldiers to move to a clicked location, avoiding any obstacles along
+	the way. One of my most fun (and sometimes frustrating) projects.
       </p>
       <ul>
+	<li>Language/Technology: Ruby, Tk</li>
 	<li>Click to move: soldiers will pathfind to selected location.</li>
 	<li>Chance to hit/damage varies with distance, nearby cover</li>
 	<li>Simple CSV format for level creation</li>
