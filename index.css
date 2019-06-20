@@ -1,5 +1,5 @@
 body {
-    background-color: lightgrey;
+    background-color: #e2e2e2;
     font-family: Courier, sans-serif;
     text-align: center;
 }
@@ -9,15 +9,19 @@ h1 a {
     text-decoration: none;
 }
 
-#main-content {
-    text-align: left;
-    margin-left: 10%;
-    margin-right: 10%;
-    max-width: 80%;
+h3 {
+    margin-top: 3em;
 }
 
-#main-content p, #main-content ul {
-    margin-bottom: 2em;
+#main-content {
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 700px;
+}
+
+#main-content p {
+    text-indent: 2em;
 }
 
 #main-content > a {
