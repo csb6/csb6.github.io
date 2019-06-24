@@ -1,6 +1,10 @@
 body {
     background-color: #e2e2e2;
-    font-family: Courier, sans-serif;
+    font-family: Menlo, Monaco, "Lucida Console", "Liberation Mono",
+		 "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New",
+		 monospace, serif;
+    font-size: 1rem;
+    line-height: 1.5rem;
     text-align: center;
 }
 
