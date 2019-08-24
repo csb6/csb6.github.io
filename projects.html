@@ -21,6 +21,80 @@
 	Here are my publicly released projects, in varying states of
 	completion. Ordered roughly by date of creation:
       </p>
+      <h3>Rougelike Game (July 2019-Present)</h3>
+      <a href="https://github.com/csb6/rougelike">Repository</a>
+      <p>
+	An in-progress rougelike computer game with short-range teleportation
+	as a key game mechanic. I attempted this project as a way to gain
+	experience in C++ and object-oriented programming, as well as
+	UI design (in a text-based setting). I have also been learning to
+	use compiler tools, such as the clang-tidy linter, to make my code
+	clearer and less bug-prone.
+      </p>
+      <p>Note: currently only support for macOS</p>
+      <ul>
+	<li>
+	  Language/Technology: C++11, Bash,
+	  <a href="https://github.com/nsf/termbox">Termbox</a>
+	</li>
+	<li>.ini files for specifying stats of custom monsters/items</li>
+	<li>Melee/ranged combat systems</li>
+	<li>Character creation/character sheet with stats</li>
+	<li>RNG-based combat that takes into account characters' armor/weapons</li>
+	<li>Monster AI that attempts to close-in on/attack player</li>
+	<li>Map files are created as simple .csv files</li>
+      </ul>
+      <h3>Bthreads (August 2019)</h3>
+      <a href="https://github.com/csb6/bthreads">Repository</a>
+      <p>
+	A Python library supporting behavioral programming (BP), an experimental
+	programming paradigm focused on creating separate behaviors or
+	"b-threads" to be run in parallel or as coroutines. My implementation
+	uses Python generators as a sort of coroutine.
+      </p>
+      <p>
+	The aim of BP is to write code incrementally, with each b-thread waiting for,
+	blocking, or requesting events to occur. Since all actions the b-threads
+	take have to be requested before they can happen, they are much easier to
+	reason about than dense, interdependent code. Simply by looking at a log
+	of events, developers can easily develop in an "append-only" style, adding
+	new behaviors to change the sequence of events that are triggered without
+	knowing or caring about the code in prior behaviors.
+      </p>
+      <p>
+	See the repository README for a more in-depth explanation with examples.
+      </p>
+      <ul>
+	<li>Language/Technology: Python</li>
+	<li>Write b-threads like normal Python generators</li>
+	<li>
+	  Repository has example of fairly complex 2-player tic-tac-toe
+	  program which validates each player's moves and checks for winning
+	  conditions.
+	</li>
+      </ul>
+      <h3>Mail.py (May-June 2019)</h3>
+      <a href="https://github.com/csb6/mail.py">Repository</a>
+      <p>
+	A bare-bones IMAP email client in Tkiner, still not feature-complete.
+	Right now, it supports loading/viewing the messages in an email
+	account's inbox and sending plaintext messages from the same account.
+      </p>
+      <p>
+	The purpose of this project was to see how far I could push my Python
+	skillset, and while I managed to get the very basic features implemented,
+	parsing messages, which come in a variety of HTML and plaintext formats,
+	proved difficult. Interacting with the IMAP protocol also took more effort
+	than I expected. However, the client still works as a simple email inbox
+	viewer and message sender.
+      </p>
+      <ul>
+	<li>Language/Technology: Python, Tk, IMAP, SQLite</li>
+	<li>Load your inbox into a local SQL database</li>
+	<li>Model-View-Adapter Architecture</li>
+	<li>Send emails</li>
+	<li>See senders, subjects, time of sending for all messages</li>
+      </ul>
       <h3>Event Simulator (May 2019)</h3>
       <a href="https://github.com/csb6/event-simulator">Repository</a>
       <p>
