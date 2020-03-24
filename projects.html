@@ -21,13 +21,39 @@
 	Here are my publicly released projects, in varying states of
 	completion. Ordered roughly by date of creation:
       </p>
-      <h3>Editor (November 2019-present)</h3>
+      <h3>Editorial (November 2019-Present)</h3>
+      <a href="http://github.com/csb6/editorial">Repository</a>
+      <p>
+        A text editor written using the ncurses TUI library. The editor looks
+        and functions a lot like the nano editor, but has better support for
+        syntax highlighting. Serves as a functional - although simple - text
+        editor for your terminal.
+      </p>
+      <ul>
+        <li><span class="project-label">Language/Technology:</span>
+          C++17, ncurses</li>
+        <li>Syntax highlighting for C++, Markdown, and MIPS assembly</li>
+        <li>Simple scrolling and undo functionality</li>
+        <li>Uses compile-time code generation to generate custom functions
+          that highlight each language's syntax extremely rapidly</li>
+        <li>Easily extendable syntax highlighting for other languages</li>
+        <li>Compact and straightforward implementation - ~900 LOC</li>
+        <li>Works well with large files</li>
+      </ul>
+      
+      <h3>Editor (November-December 2019)</h3>
       <a href="https://github.com/csb6/editor">Repository</a>
       <p>
 	A small text editor written using the FLTK GUI library. This
 	was a great opportunity to learn more about working with
 	others' documentation (and all of the surprises that come with it),
 	as well as expand my experience with GUI programming.
+      </p>
+      <p>
+        However, I found FLTK's support to syntax highlighting to be lacking,
+        so I ended up stopping this project and starting work on Editorial,
+        a terminal-based editor that gives me more control about how content
+        is displayed and drawn to the screen (see above).
       </p>
       <ul>
 	<li><span class="project-label">Language/Technology:</span>
