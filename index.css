@@ -43,3 +43,8 @@ h1 a {
 span.project-label {
     color: #00802b;
 }
+
+pre {
+    background-color: ivory;
+    line-height: auto;
+}

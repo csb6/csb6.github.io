@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../index.css">
+    <title>Generating Switch Statements for Syntax Highlighting</title>
+  </head>
+  <body>
+    <div id="header">
+      <h1><a href="../index.html">Cole Blakley</a></h1>
+      <a href="../index.html">Home</a>
+      <a href="../projects.html">Projects</a>
+      <a href="../coursework.html">Coursework</a>
+      <a href="https://github.com/csb6">Github</a>
+    </div>
+    <div id="main-content">
+      <h2>Generating Switch Statements for Syntax Highlighting</h2>
+      <p>
+        I'm working on <code>editorial</code>, a custom text editor.
+        <code>editorial</code> is a terminal-based application that is a lot
+        like the <code>nano</code> editor found on pretty much every Unix system.
+        Like <code>nano</code>, I want my editor to be fast and responsive, even
+        when doing complex operations on the text of a file. However, several weeks
+        ago, I encountered a problem.
+      </p>
+      <p>
+        The editor supported basic syntax highlighting for keywords in C++,
+        but the highlighting code wasn't as efficient as I wanted it to be.
+        Basically, the original code looked something like this:
+      </p>
+        <hr>
+        <pre><code>
+    void highlight_cpp(Screen &screen)
+    {
+        for(int row = 0; row < screen.size(); ++row) {
+            int column = 0
+            while(column < screen[row].size()) {
+                switch(screen[row][column]) {
+                case 'a':
+                    if(matches(row, column, "auto") {
+                        screen.highlight(row, column, column+4);
+                        column += 4;
+                    }
+                    break;
+                case 'b':
+                    if(matches(row, column, "bool") {
+                        screen.highlight(row, column, column+4);
+                        column += 4;
+                    } else if(matches(row, column, "break") {
+                        screen.highlight(row, column, column+5);
+                        column += 5;
+                    }
+                    break;
+                case 'c':
+                    if(matches(row, column, "case") {
+                        screen.highlight(row, column, column+4);
+                        column += 4;
+                    } else if(....) {
+                        ....
+                ....
+                default:
+                    ++col;
+                    break;
+                }
+            }
+        }
+    }
+                                     </code></pre>
+        <hr>
+      <p>
+        The idea is simple: only highlight the text currently shown on the
+        screen (thus making highlighting faster for large files) and try to speed
+        up highlighting by using a <code>switch</code> to narrow down the search
+        based on the first letter.
+      </p>
+      <p>
+        This worked okay, and it was fast enough to be usable, but the inefficiency
+        bothered me. Why should the editor have to search through each of the
+        possible keywords that start with 'b', for instance, in order to get to
+        "break"? Would it be possible to have another <code>switch</code>
+        statement to check the second letter, the third letter, and so on, in
+        a massive, nested <code>switch</code> statement? That way, each letter
+        onscreen would only be checked once. Getting to "break" would only
+        require a jump to 'b' and a jump to 'r' rather than a jump to 'b' and a
+        linear search of all other keywords starting with 'b'. The code that I
+        wanted looked something like this:
+      </p>
+      <hr>
+      <pre><code>
+    void highlight_cpp(Screen &screen)
+    {
+        for(int row = 0; row < screen.size(); ++row) {
+            int column = 0
+            while(column < screen[row].size()) {
+                switch(screen[row][column]) {
+                case 'a':
+                    switch(screen[row][column++]) {
+                    case 'u':
+                        switch(column++) {       
+                        case 't':
+                            switch(column++) {
+                            case 'o':
+                                screen.highlight(row, column-3, column);
+                                break;
+                            }
+                            break;
+                        }
+                    }
+                    break;
+                 case 'b':
+                     switch(screen[row][column++]) {
+                     case 'o':
+                         switch(screen[row][column++]) {
+                         case 'o':
+                             switch(screen[row][column++]) {
+                             case 'l':
+                                 screen.highlight(row, column-3, column);
+                                 break;
+                             }
+                             break;
+                         }
+                         break;
+                     case 'r':
+                         switch(screen[row][column++]) {
+                         case 'e':
+                            switch(screen[row][column++]) {
+                            case 'a':
+                                switch(screen[row][column++]) {
+                                case 'k':
+                                    screen.highlight(row, column-4, column);
+                                    break;
+                                }
+                            }
+                            break;
+                         }
+                         break;
+                     }
+                     ....      
+                     break;
+                  case 'c':
+                     ....
+                  default:
+                     ++col;           
+                     break;
+                }
+            }
+        }
+    }
+      </code></pre>
+      <hr>
+      <p>
+        However, this would be incredibly tedious to write by hand for the dozens of
+        types and keywords I wanted to highlight. There had to be a way to automate
+        these nested <code>switch</code> statements in code so that I could simply
+        do something like this, with a <code>switch</code> statement as the implementation
+        of the <code>matcher.contains()</code> function:
+      </p>
+      <hr>
+      <pre><code>
+      Matcher m;
+      m.add_match("bool");
+      m.add_match("break");
+      m.add_match("auto");
+      ....
+      for(auto &row : screen) {
+          int column = 0;
+          while(column < row.size()) {
+              if(int len = matcher.contains(row, column)) {
+                  screen.highlight(row, column, column+len);
+              }
+          }
+      }
+      </code></pre>
+      <hr>
+      <p>
+        Since the C++ language has no easy way to generate <code>switch</code>
+        statements at compile-time, I wrote a simple code generation tool as a separate
+        program that builds up a tree structure to represent the nested <code>switch</code>'s
+        and then writes the necessary code into a file. This generated file is
+        then compiled as part of the main program's build, providing the necessary
+        highlighting code as a specialized function.
+      </p>
+      <p>
+        While this method was fun to implement, it is likely
+        inefficient due to the frequent branch misses that will occur due to the
+        extreme nesting of massive <code>switch</code> statements. Nonetheless,
+        I added it for now to my editor until I think of a better way to automatically
+        create highlighting rules.
+      </p>
+      <p>
+        <a href="https://github.com/csb6/editorial">
+          Here is the link to the repository for <code>editorial</code>.
+        </a>
+      </p>
+    </div>
+  </body>
+</html>
