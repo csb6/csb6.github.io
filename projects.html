@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Cole Blakley - Projects</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <link rel="stylesheet" href="index.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<div id="header">
+  <h1><a href="index.html">Cole Blakley</a></h1>
+  <a href="index.html">Home</a>
+  <a href="projects.html">Projects</a>
+  <a href="https://github.com/csb6">Github</a>
+</div>
+<div id="main-content">
+<h1 id="projects">Projects</h1>
+<p>Here are my noteworthy, publicly released personal projects, in varying states of completion. Ordered roughly by date of creation:</p>
+<h2 id="bluebird-july-2020-present">Bluebird (July 2020-present)</h2>
+<p><a href="https://github.com/csb6/bluebird">Repository</a></p>
+<p>An ahead-of-time compiler for a new programming language that resembles Ada and C++. It is a front-end for the LLVM compiler toolchain (also used by the clang C and C++ compiler project). My goal is to learn about compiler construction and implement a language capable of expressing useful programs.</p>
+<h3 id="features">Features</h3>
+<ul>
+<li>Custom lexing, parsing, and semantic analysis stages</li>
+<li>Static type-checking and the ability to define custom types</li>
+<li>Generates LLVM intermediate representation, which is then translated to stand-alone executables</li>
+<li>Debug support for gdb and lldb</li>
+<li>Several optimization passes, turned on with a command-line flag</li>
+<li>Support for the basic constructs of an imperative programming language (e.g. mutable variables, while-loops, functions, integer/boolean/character types, a limited form of reference types, arrays)</li>
+</ul>
+<h3 id="languagetechnologies">Language/Technologies</h3>
+<ul>
+<li>C++</li>
+<li>LLVM</li>
+<li>GNU Multiple Precision Arithmetic Library</li>
+</ul>
+<h2 id="html-june-2020">HTML++ (June 2020)</h2>
+<p><a href="https://github.com/csb6/html-plus-plus">Repository</a></p>
+<p>A C++ template library that enables the writing of HTML documents using nested C++ types. The end result after compiling is a C++ program that prints out a properly-indented HTML document.</p>
+<p>This was a test drive of C++20’s expanded features, which more easily allow for strings to be passed as non-type template parameters. This made it possible to emulate the syntax of HTML tags (e.g. <code>&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;/html&gt;</code> in HTML becomes <code>html&lt;body&lt;&gt;, head&lt;&gt;&gt;</code> in C++) using legal C++ code. While mostly intended as a funny demonstration of how C++’s template system can be used beyond its original purpose, the library does provide a degree of static type-checking that HTML itself does not.</p>
+<h3 id="features-1">Features</h3>
+<ul>
+<li>Ability to generate basic tags, such as <code>&lt;html&gt;</code>, <code>&lt;head&gt;</code>, <code>&lt;body&gt;</code>, <code>&lt;p&gt;</code>, <code>&lt;h1&gt;</code>, etc.</li>
+<li>Pretty prints properly-indented document</li>
+</ul>
+<h3 id="languagetechnologies-1">Language/Technologies</h3>
+<ul>
+<li>C++</li>
+</ul>
+<h2 id="editorial-november-2019-october-2020">Editorial (November 2019-October 2020)</h2>
+<p><a href="https://github.com/csb6/editorial">Repository</a></p>
+<p>A simple <code>nano</code>-like text editor written using the ncurses library. It does not have a large feature set, but works well for simple text editing.</p>
+<h3 id="features-2">Features</h3>
+<ul>
+<li>Syntax highlighting for C++, Markdown, and MIPS assembly</li>
+<li>Simple scrolling and undo functionality</li>
+<li>Generated syntax highlighting code</li>
+<li>Easily extendable syntax highlighting for other languages</li>
+<li>Compact and straightforward implementation - ~900 LOC</li>
+<li>Works well with large files</li>
+</ul>
+<h3 id="languagetechnologies-2">Language/Technologies</h3>
+<ul>
+<li>C++</li>
+<li>ncurses</li>
+</ul>
+<h2 id="editor-november-december-2019">Editor (November-December 2019)</h2>
+<p><a href="https://github.com/csb6/editor">Repository</a></p>
+<p>Another text editor project, this time using the FLTK GUI library rather than an ncurses UI. This was a great opportunity to learn more about working with a mature open-source library’s documentation (and all of the surprises that come with it), as well as expand my experience with GUI programming.</p>
+<h3 id="features-3">Features</h3>
+<ul>
+<li>Custom coloring of text and background</li>
+<li>Basic Save, Save As, and Open operations for files, with keyboard shortcuts</li>
+<li>Basic support for font-loading</li>
+<li>Line numbers</li>
+</ul>
+<h3 id="languagetechnologies-3">Language/Technologies</h3>
+<ul>
+<li>C++</li>
+<li>FLTK</li>
+</ul>
+<h2 id="mail.py-may-june-2019">Mail.py (May-June 2019)</h2>
+<p><a href="https://github.com/csb6/mail.py">Repository</a></p>
+<p>A bare-bones IMAP email client in Tkinter, still not feature-complete. Right now, it supports loading/viewing the messages in an email account’s inbox and sending plain-text messages from the same account.</p>
+<p>The purpose of this project was to see how far I could push my Python skill set, and while I managed to get the very basic features implemented, parsing messages, which come in a variety of HTML and plain-text formats, proved difficult. Interacting with the IMAP protocol also took more effort than I expected.</p>
+<p>However, the client still works as a simple email inbox viewer and message sender.</p>
+<h3 id="features-4">Features</h3>
+<ul>
+<li>Loads inbox into a local SQL database&lt;</li>
+<li>Compose/send emails</li>
+<li>Uses Model-View-Adapter architecture to keep code decoupled</li>
+<li>Ability to view senders, subjects, time of sending for all messages</li>
+</ul>
+<h3 id="languagetechnologies-4">Language/Technologies</h3>
+<ul>
+<li>Python</li>
+<li>Tkinter</li>
+<li>IMAP</li>
+<li>SQLite</li>
+</ul>
+</div>
+</body>
+</html>
