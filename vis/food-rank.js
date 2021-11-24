@@ -12,6 +12,7 @@ function get_data(dataString) {
 
 const tf_dataset = get_data(tf_data);
 const tf_log_idf_log_dataset = get_data(tf_log_idf_log_data);
+let curr_dataset = tf_dataset;
 
 let plot = d3.select("#chart")
     .append("svg")
@@ -42,11 +43,9 @@ function plot_data(data, threshold) {
         .attr("transform", `translate(${width} 0)`)
         .call(d3.axisRight(rankScale));
 
-    let median = d3.median(data, (row) => Math.abs(row.orig_rank - row.new_rank));
-
     function setup(selection) {
         selection
-            .filter((row) => Math.abs(row.orig_rank - row.new_rank) > median)
+            .filter((row) => Math.abs(row.orig_rank - row.new_rank) > threshold)
             .attr("x1", 50)
             .attr("y1", (row) => rankScale(row.orig_rank))
             .attr("x2", width)
@@ -77,8 +76,14 @@ function plot_data(data, threshold) {
 }
 
 plot_data(tf_dataset, 10)
+curr_dataset = tf_dataset;
 
 // Controls
+d3.select("#threshold-input")
+    .on("input", function(e) {
+        plot_data(curr_dataset, parseInt(this.value));
+    })
+
 document.getElementById("unhealthy-button").onclick = function() {
     plot.selectAll("line")
         .filter((row) => row.kind === "unhealthy")
@@ -113,10 +118,14 @@ document.getElementById("all-button").onclick = function() {
 
 document.getElementById("tf-rank-button").onclick = function() {
     plot_data(tf_dataset, 10);
+    d3.select("#threshold-input").attr("value", 10);
+    curr_dataset = tf_dataset;
 }
 
 document.getElementById("tf-log-idf-log-rank-button").onclick = function() {
-    plot_data(tf_log_idf_log_dataset, 70);
+    plot_data(tf_log_idf_log_dataset, 75);
+    d3.select("#threshold-input").attr("value", 75);
+    curr_dataset = tf_dataset;
 }
 
 document.getElementById("lower-rank-button").onclick = function() {
