@@ -82,7 +82,7 @@ plot_data(tf_dataset, 10)
 document.getElementById("unhealthy-button").onclick = function() {
     plot.selectAll("line")
         .filter((row) => row.kind === "unhealthy")
-        .attr("stroke-width", 2);
+        .attr("stroke-width", 3);
     plot.selectAll("line")
         .filter((row) => row.kind !== "unhealthy")
         .attr("stroke-width", 0);
@@ -91,7 +91,7 @@ document.getElementById("unhealthy-button").onclick = function() {
 document.getElementById("neutral-button").onclick = function() {
     plot.selectAll("line")
         .filter((row) => row.kind === "neutral")
-        .attr("stroke-width", 2);
+        .attr("stroke-width", 3);
     plot.selectAll("line")
         .filter((row) => row.kind !== "neutral")
         .attr("stroke-width", 0);
@@ -100,7 +100,7 @@ document.getElementById("neutral-button").onclick = function() {
 document.getElementById("healthy-button").onclick = function() {
     plot.selectAll("line")
         .filter((row) => row.kind === "healthy")
-        .attr("stroke-width", 2);
+        .attr("stroke-width", 3);
     plot.selectAll("line")
         .filter((row) => row.kind !== "healthy")
         .attr("stroke-width", 0);
@@ -108,7 +108,7 @@ document.getElementById("healthy-button").onclick = function() {
 
 document.getElementById("all-button").onclick = function() {
     plot.selectAll("line")
-        .attr("stroke-width", 2);
+        .attr("stroke-width", 3);
 }
 
 document.getElementById("tf-rank-button").onclick = function() {
