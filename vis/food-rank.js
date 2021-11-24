@@ -118,3 +118,21 @@ document.getElementById("tf-rank-button").onclick = function() {
 document.getElementById("tf-log-idf-log-rank-button").onclick = function() {
     plot_data(tf_log_idf_log_dataset, 70);
 }
+
+document.getElementById("lower-rank-button").onclick = function() {
+    plot.selectAll("line")
+        .filter((row) => row.new_rank - row.orig_rank > 0)
+        .attr("stroke-width", 3);
+    plot.selectAll("line")
+        .filter((row) => row.new_rank - row.orig_rank <= 0)
+        .attr("stroke-width", 0);
+}
+
+document.getElementById("higher-rank-button").onclick = function() {
+    plot.selectAll("line")
+        .filter((row) => row.new_rank - row.orig_rank <= 0)
+        .attr("stroke-width", 3);
+    plot.selectAll("line")
+        .filter((row) => row.new_rank - row.orig_rank > 0)
+        .attr("stroke-width", 0);
+}
