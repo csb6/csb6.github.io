@@ -1,47 +1,38 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Cole Blakley - Home</title>
+  <title>Cole's Blog - Index</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    span.underline{text-decoration: underline;}
-    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    ul.task-list{list-style: none;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
   </style>
   <link rel="stylesheet" href="index.css" />
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
 </head>
 <body>
-<div id="header">
-  <h1><a href="index.html">Cole Blakley</a></h1>
-  <a href="index.html">Home</a>
-  <a href="projects.html">Projects</a>
-  <a href="https://github.com/csb6">Github</a>
-</div>
-<div id="main-content">
-<h1 id="about-me">About Me</h1>
-<p>Hi, I’m Cole Blakley.</p>
-<p>I am a junior at the University of Arizona majoring in Computer Science and minoring in English.</p>
-<p>I am interested in systems programming, compilers, and simulations.</p>
-<p>For the past three years, I have been working with a variety of technologies.</p>
-<p>Some of the languages I have experience in are:</p>
+<header>
+    <a href="index.html">Cole's Blog</a>
+</header>
+<main>
+<h1 id="articles">Articles</h1>
 <ul>
-<li>C++</li>
-<li>Java</li>
-<li>Python</li>
-<li>C</li>
-<li>MIPS assembly</li>
-<li>JavaScript/HTML/CSS</li>
+<li><a href="lr-spec.html">A Formal Specification of LR Parsers</a></li>
 </ul>
-<p>I like to tinker with programming languages as a hobby, so I’ve also worked with some lesser-used languages like Ada, Standard ML, and Prolog.</p>
-<p>You can find my noteworthy projects on the <a href="projects.html">Projects page</a>.</p>
-</div>
+</main>
 </body>
 </html>

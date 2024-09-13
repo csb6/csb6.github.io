@@ -1,43 +1,38 @@
 body {
-    font-family: Menlo, Monaco, "Lucida Console", "Liberation Mono",
-		 "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New",
-		 monospace, serif;
-    font-size: 12pt;
-    line-height: 1.5rem;
+    font-family: "Helvetica Neue", "Helvetica", serif;
+    line-height: 1.6rem;
     text-align: center;
     background-color: ghostwhite;
 }
 
-#main-content {
+h1 {
     text-align: left;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 800px;
+    margin-left: 20%
 }
 
-#main-content p {
-    text-indent: 2em;
-}
-
-#main-content > a {
-    margin-right: 1em;
-}
-
-#header > a, #main-content > a {
-    font-size: 1.07rem;
-    margin-right: 1em;
-}
-
-h1 a {
+header a {
+    font-size: 20pt;
     color: black;
     text-decoration: none;
 }
 
-span.project-label {
-    color: #00802b;
+main, article {
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 60%;
+}
+
+main p, article p {
+    text-indent: 2em;
+    font-size: 14pt;
 }
 
 pre {
     background-color: ivory;
     line-height: auto;
+}
+
+#footnotes {
+    text-align: left;
 }

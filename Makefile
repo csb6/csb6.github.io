@@ -1,12 +1,17 @@
-OPTIONS=--css=index.css --include-before-body=_header.pandoc --include-after-body=_footer.pandoc
+# Notes:
+#   - -M means --metadata
+#   - pagetitle only sets the <title> in the <head>; title sets both the <title> and adds an <h1> to the page
+OPTIONS = --standalone --css=index.css --include-before-body=_headers/header.html -M lang="en"
 
-site: index.html projects.html
+.PHONY: site
+site: index.html lr-spec.html
 
-index.html: _index.md _header.pandoc _footer.pandoc
-	pandoc $(OPTIONS) -M pagetitle="Cole Blakley - Home" -o index.html _index.md
+index.html: _index.md _headers/header.html
+	pandoc $(OPTIONS) -M pagetitle="Cole's Blog - Index" -o index.html _index.md
 
-projects.html: _projects.md _header.pandoc _footer.pandoc
-	pandoc $(OPTIONS) -M pagetitle="Cole Blakley - Projects" -o projects.html _projects.md
+lr-spec.html: _lr-spec.md _headers/header.html
+	pandoc $(OPTIONS) -M title="A Formal Specification of LR Parsers" -o lr-spec.html _lr-spec.md
 
+.PHONY: clean
 clean:
-	rm -rf *.html *~
+	rm -f *.html *~
