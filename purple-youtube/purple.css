@@ -1,0 +1,28 @@
+body {
+    font-family: "Helvetica Neue", "Helvetica", serif;
+    line-height: 1.6rem;
+    text-align: center;
+    background-color: ghostwhite;
+}
+
+h1 {
+    text-align: center;
+}
+
+header a {
+    font-size: 20pt;
+    color: black;
+    text-decoration: none;
+}
+
+main, article {
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 60%;
+    min-width: 20em;
+}
+
+main p, article p {
+    font-size: 14pt;
+}
