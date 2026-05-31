@@ -35,7 +35,7 @@
 <h2 id="introduction">Introduction</h2>
 <p><a href="https://en.wikipedia.org/wiki/LR_parser">LR parsers</a>
 (including SLR, LALR, and canonical LR, among others) provide an elegant
-and powerful method of parsing strings according to the rules of <a
+and powerful method of parsing strings using <a
 href="https://en.wikipedia.org/wiki/Context-free_grammar">context-free
 grammars</a> (CFGs).</p>
 <p>For conforming grammars, these parsers have runtimes that are linear
@@ -49,9 +49,8 @@ of input tokens, giving every valid input a canonical syntactic
 structure.</p>
 <p>Because LR family parsers are so extensively studied, provide such
 useful guarantees, and relate so closely to formal grammars, they are an
-ideal subject for formal specification and verification, as shown in the
-literature <a href="#fn1" class="footnote-ref" id="fnref1"
-role="doc-noteref"><sup>1</sup></a>.</p>
+ideal subject for formal specification and verification. <a href="#fn1"
+class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <p>While the members of the LR family accept different subsets of CFGs
 and vary significantly in their construction, the core concepts of each
 parser are very similar, and parser variants are often extensions of
@@ -73,10 +72,9 @@ intended to be executed. Often they can be, but sometimes they are too
 abstract (e.g. a function that is defined by its pre- and
 post-conditions but has no actual body) or too inefficient (e.g. a map
 data structure that uses sets as its keys). At a later stage we could
-create more concrete specifications (i.e. closer to an executable
-program) to use as the basis for implementations and prove that the
-concrete specification is equivalent to the abstract specification. This
-process, called <a
+create more concrete specification (i.e. closer to an executable
+program) to use as the basis for implementations and prove that it is
+equivalent to the abstract specification. This process, called <a
 href="https://en.wikipedia.org/wiki/Refinement_(computing)">refinement</a>,
 is beyond the scope of this article, however.</p>
 <p>All of this means that our formal specifications are not very useful
@@ -90,26 +88,28 @@ machine to perform.</p>
 href="https://en.wikipedia.org/wiki/Vienna_Development_Method">Vienna
 Development Method</a> specification language, or VDM-SL for short. VDM
 is derived from work on formal specification done at IBM in the 1970s,
-making it one of the oldest formal methods. VDM-SL is based on <a
-href="https://en.wikipedia.org/wiki/Set_theory">set theory</a> but with
-some important modifications. All values in the language have a type -
-types include basic primitives found in most programming languages such
-as integers, rational numbers, and booleans as well as composite types
-such as sets, unions, maps, records, and sequences. The language is very
-rich but has well-defined semantics and is suitable for formal
-proof.</p>
+making it one of the oldest formal methods. VDM-SL is based on a form of
+<a href="https://en.wikipedia.org/wiki/Set_theory">set theory</a>. All
+values in the language have a type. Types include basic primitives found
+in most programming languages such as integers, rational numbers, and
+booleans as well as composite types such as sets, unions, maps, records,
+and sequences. The language is very rich but has well-defined semantics
+and is suitable for formal proof.</p>
 <p>If you are familiar with basic set theory and functional programming
-it should be easy to read the specifications I provide.</p>
+it should be easy to read the specifications I provide. For more
+information about VDM-SL, see this <a
+href="https://www.overturetool.org/languages/">great resource</a>.</p>
 <h2 id="basic-data-types">Basic Data Types</h2>
 <h3 id="terminals">Terminals</h3>
 <p>The input to a parser is a stream of tokens, also known as
-<em>terminals</em>. While tokens are often characters from a text
-encoding such as ASCII, language-specific tokens produced consist of the
-basic components of the language (such as keywords, parentheses, numeric
-literals, etc.) can be used instead. These tokens are typically produced
-by a lexer. Our approach assumes that we have enumerated the possible
-kinds of tokens - whatever they may be - and so we represent them with a
-type called <code>Terminal</code>.</p>
+<em>terminals</em>. While tokens can be characters, e.g. from the ASCII
+encoding, language-specific tokens for each of the basic components of
+the syntax (such as keywords, parentheses, punctuation, numeric
+literals, etc.) are usually used instead. These tokens are produced by a
+<a href="https://en.wikipedia.org/wiki/Lexical_analysis">lexer</a>. Our
+approach assumes that there are a finite number of possible kinds of
+tokens - whatever they may be - and so we represent them with an
+enumerated type called <code>Terminal</code>.</p>
 <p>For example, a simple mathematical language might use the following
 definition:</p>
 <pre><code>Terminal = &lt;Plus&gt; | &lt;Minus&gt; | &lt;Mult&gt; | &lt;Div&gt; | &lt;LParen&gt; | &lt;RParen&gt; | &lt;Digit&gt;;</code></pre>
@@ -118,16 +118,17 @@ definition:</p>
 so-called <em>nonterminals</em> with sequences of terminals and/or
 nonterminals. We refer to the nonterminal part as the <em>left-hand
 side</em> or <em>lhs</em> of the rule, and the corresponding sequence as
-the <em>right-hand side</em> or <em>rhs</em> of the rule. The same
-nonterminal can be the <em>lhs</em> of multiple rules. Here is a VDM-SL
+the <em>right-hand side</em> or <em>rhs</em> of the rule. A nonterminal
+can be the <em>lhs</em> of multiple different rules. Here is a VDM-SL
 type representing the nonterminals of a simple language:</p>
 <pre><code>Nonterminal = &lt;Number&gt; | &lt;Sum&gt; | &lt;Product&gt; | &lt;Factor&gt; | &lt;START&gt;;</code></pre>
-<p>While both terminals and nonterminals can appear on the <em>rhs</em>
-of a rule, they have different properties. Terminals are by definition
-individual tokens, while nonterminals represent contiguous sections of
-the input that match some rule found in the grammar. Ultimately, parsing
-is a process of checking that the entire input sequence matches a rule
-that has a special nonterminal, <code>&lt;START&gt;</code>, as its
+<p>Terminals and nonterminals can both appear on the <em>rhs</em> of a
+rule, but they have different properties. Terminals are by definition
+individual tokens and so always represent a single matched token from
+the input. Nonterminals are more flexible - each represents a contiguous
+section of the input matching a rule found in the grammar. Ultimately,
+parsing is a process of checking that the entire input stream matches a
+rule that has a special nonterminal, <code>&lt;START&gt;</code>, as its
 <em>lhs</em>.</p>
 <p>Below are definitions for the record type <code>Rule</code> as well
 as <code>Symbol</code>, which is a union of terminals and nonterminals.
@@ -139,19 +140,16 @@ Rule :: lhs: Nonterminal
 <p>The process of matching a rule can be thought of as a series of
 steps: first, the first symbol of its <em>rhs</em> is matched, then the
 second, and so on until all of the <em>rhs</em> has been matched against
-the input. Since we match the symbols in order, starting from the first
-symbol (if any) of the <em>rhs</em>, all partial matches will be
-prefixes of the <em>rhs</em> with the full match being the longest
-possible prefix. We call complete and in-progress matches <em>items</em>
-and represent them with the following data type:</p>
+the input. We call matches (either complete or in-progress)
+<em>items</em> and represent them with the following data type:</p>
 <pre><code>Item :: rule: Rule
         progress: nat
     inv item == item.progress &lt;= len item.rule.rhs;</code></pre>
 <p>The <code>rule</code> field represents the rule we are attempting to
-match, while <code>progress</code> represents the extent of the match so
+match and <code>progress</code> represents the extent of the match so
 far. <code>progress</code> starts at 0 (no progress) and for each symbol
 of <code>rule</code>’s <em>rhs</em> that is matched
-<code>progress</code> becomes one greater. A completed item’s
+<code>progress</code> is one greater. A completed item’s
 <code>progress</code> field equals the length of the <em>rhs</em> - the
 invariant (<code>inv</code>) in the definition means that items must not
 progress past the end of the <em>rhs</em>, for such an item would no
@@ -181,6 +179,41 @@ advanceItem(item) == mk_Item(item.rule, item.progress+1)
 pre item.progress &lt; len item.rule.rhs;</code></pre>
 <p>We will refer to these helper functions throughout the rest of the
 article.</p>
+<h2 id="lr0-parsers">LR(0) Parsers</h2>
+<p>The simplest member of the LR family is the LR(0) parser. LR(0) means
+“left-to-right, rightmost derivation with zero tokens of lookahead”.
+This means the token stream is consumed starting from the left <a
+href="#fn2" class="footnote-ref" id="fnref2"
+role="doc-noteref"><sup>2</sup></a> and moving to the right, that the
+rightmost branch of each node of the parse tree is recognized first, and
+that only the tokens that have been read so far are used to make parsing
+decisions.</p>
+<p>LR(0) parsers, like all LR family parsers, are <a
+href="https://en.wikipedia.org/wiki/Shift-reduce_parser">shift-reduce
+parsers</a>. This means that each token of input triggers either a
+<em>shift</em> action, which pushes the token onto a stack of symbols
+representing the parse state so far, or a <em>reduce</em> action, which
+pops some number of symbols off of the stack that represent the
+<em>rhs</em> of some rule in the grammar and replaces them with the
+<em>lhs</em> of that rule. Once the entire input stream has been reduced
+down to a single <code>&lt;START&gt;</code> symbol, representing the
+root node of the full parse tree, the parse is successful and
+complete.</p>
+<p>This forces us to consider: how do we determine whether to shift or
+whether to reduce given a particular token and a particular state of the
+stack?</p>
+<p>Intuitively, it is easy to see one way to track the progress of a
+parse is to track <code>Item</code>s produced from the input stream.
+Each token consumed either matches or doesn’t match the
+<code>nextSym</code> of an in-progress <code>Item</code>, and after
+reducing a completed <code>Item</code> into its <em>lhs</em> we might
+need to create new items to track. (TODO: maybe write a naive parser
+that does this? Then show how that parser can be reduced into an
+equivalent table?)</p>
+<p>To determine when to shift and when to reduce, we will use a state
+machine in the form of a transition table. Each grammar will need to
+have its own transition table generated, but this table can be reused
+once generated.</p>
 </article>
 <section id="footnotes" class="footnotes footnotes-end-of-document"
 role="doc-endnotes">
@@ -195,6 +228,12 @@ formal specifications for LR-family parsers - they describe methods of
 verifying the code derived from the specifications and also provide
 proofs of interesting properties about the specifications themselves.<a
 href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Consuming tokens from “left to right” means consuming
+them starting at the beginning of the input stream and moving towards
+the end, regardless of the actual <a
+href="https://en.wikipedia.org/wiki/Writing_system#Directionality_and_orientation">writing
+direction</a> of the language.<a href="#fnref2" class="footnote-back"
+role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 </body>
