@@ -5,7 +5,7 @@ OPTIONS = --standalone -M lang="en"
 BLOG_HEADER = --include-before-body=_headers/header.html
 
 .PHONY: site
-site: index.html lr-spec.html birdtube/index.html birdtube/privacy-policy.html
+site: index.html lr-spec.html birdtube/index.html birdtube/privacy-policy.html birdtube/terms.html
 
 index.html: _index.md _headers/header.html
 	pandoc $(OPTIONS) $(BLOG_HEADER) --css=index.css -M pagetitle="Cole's Blog - Index" -o index.html _index.md
@@ -18,6 +18,9 @@ birdtube/index.html: birdtube/_index.md _headers/header.html
 
 birdtube/privacy-policy.html: birdtube/_privacy-policy.md _headers/header.html
 	pandoc $(OPTIONS) --css=purple.css -M title="BirdTube Privacy Policy" -o birdtube/privacy-policy.html birdtube/_privacy-policy.md
+
+birdtube/terms.html: birdtube/_terms.md _headers/header.html
+	pandoc $(OPTIONS) --css=purple.css -M title="BirdTube Terms and Conditions" -o birdtube/terms.html birdtube/_terms.md
 
 .PHONY: clean
 clean:

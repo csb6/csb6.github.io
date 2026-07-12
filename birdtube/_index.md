@@ -8,6 +8,7 @@ This is an unofficial plugin not affiliated with or endorsed by either Pidgin or
 ## Links
 
 - [Source Code Repository](https://github.com/csb6/birdtube)
-- [Privacy Policy](./privacy-policy.html)
+- [Privacy Policy](privacy-policy.html)
+- [Terms and Conditions](terms.html)
 
 </article>
